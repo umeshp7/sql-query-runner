@@ -2,6 +2,7 @@ import { JSX } from 'react';
 import './App.css';
 import { PanelGroup, Panel } from 'react-resizable-panels';
 
+import Workbench from './components/Workbench/Workbench';
 import Typography from '@mui/material/Typography';
 
 /**
@@ -36,7 +37,7 @@ function App() : JSX.Element {
             </div>
           </Panel>
           <Panel minSize={40}>
-            <div>Workbench</div>
+            <Workbench />
           </Panel>
         </PanelGroup>
       </Panel>
