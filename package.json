@@ -1,8 +1,14 @@
 {
-  "name": "atlan-sql-runner",
+  "name": "sql-query-runner",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/lang-sql": "^6.8.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.7",
+    "@mui/x-charts": "^7.27.1",
+    "@mui/x-tree-view": "^7.26.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -11,8 +17,12 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@uiw/react-codemirror": "^4.23.10",
+    "debounce": "^2.2.0",
+    "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-resizable-panels": "^2.1.7",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -40,5 +50,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/prismjs": "^1.26.5",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.26.0"
   }
 }
