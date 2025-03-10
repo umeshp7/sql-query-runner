@@ -1,7 +1,7 @@
 import React from 'react';
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { Typography } from '@mui/material';
-import Select from '@mui/material/Select';
+
 interface Column {
   name: string;
   type: string;
@@ -67,25 +67,20 @@ const tables: Table[] = [
 const Sidebar: React.FC = () => {
   return (
     <div>
-      <div style={{ display: 'flex',
-        justifyContent: 'space-evenly',
-        height:  '80%', alignItems: 'center', paddingLeft: 8 }}>
+      <div
+        style={{
+          display: 'flex',
+          height: '80%',
+          alignItems: 'center',
+          paddingLeft: 8
+        }}>
         <Typography
           variant="h6"
           component="h2"
           color='primary'
         >
-          Database Tables
+          Tables
         </Typography>
-        <Select
-          variant="outlined"
-          defaultValue="beta"
-          size='small'
-        >
-          <option value="beta">Beta</option>
-          <option value="stage">Stage</option>
-          <option value="prod">Prod</option>
-        </Select>
       </div>
       <SimpleTreeView aria-label="database schema">
         {tables.map((table, index) => (
