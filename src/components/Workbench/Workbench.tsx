@@ -1,15 +1,22 @@
 import React, { memo, useState } from 'react';
 
+// external components
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+
+// internal components
 import QueryEditor from '../QueryEditor/QueryEditor';
+import Queries from '../Queries/Queries';
+import Result from '../Result/Result';
+
+// utils
+import getQueryData from '../../utils/getQueryData';
 
 const defaultCode = `// Enter your SQL query here and press Ctrl+Enter to 
 execute.`;
 
-
 function Workbench () {
   const [currentQuery, setCurrentQuery] = useState(defaultCode);
-  // const [data, setData] = useState<any[] | null>(null);
+  const [data, setData] = useState<any[] | null>(null);
 
   const [queryList, setQueryList] = useState<string[]>([
     'SELECT * FROM table;',
@@ -21,6 +28,10 @@ function Workbench () {
   const handleAction = (action: string) => {
     switch (action) {
     case 'run': {
+      const data = getQueryData(currentQuery);
+      if (data) {
+        setData(data);
+      }
       setHistoryList([currentQuery, ...historyList]);
     }
       break;
@@ -49,13 +60,17 @@ function Workbench () {
             />
           </Panel>
           <Panel defaultSize={40}>
-            <div>SidePanel for queries</div>
+            <Queries
+              selectQuery={setCurrentQuery}
+              queries={queryList}
+              history={historyList}
+            />
           </Panel>
         </PanelGroup>
       </Panel>
       <PanelResizeHandle />
       <Panel minSize={40}>
-        <div>Results</div>
+        <Result data={data}/>
       </Panel>
     </PanelGroup>
   );
