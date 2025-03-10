@@ -1,9 +1,13 @@
 import { JSX } from 'react';
 import './App.css';
+
+// external
 import { PanelGroup, Panel } from 'react-resizable-panels';
 
+// internal components
 import Workbench from './components/Workbench/Workbench';
 import Typography from '@mui/material/Typography';
+import Sidebar from './components/Sidebar/Sidebar';
 
 /**
  * Base App
@@ -33,7 +37,7 @@ function App() : JSX.Element {
               borderRight: '1px solid #dfdfdf',
               borderTop: '1px solid #dfdfdf',
             }}>
-              <div>Sidebar</div>
+              <Sidebar />
             </div>
           </Panel>
           <Panel minSize={40}>
