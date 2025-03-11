@@ -13,51 +13,51 @@ interface Table {
 }
 
 const tables: Table[] = [
-  { name: 'Users', columns: [
+  { name: 'users', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
     { name: 'email', type: 'varchar' },
   ] },
-  { name: 'Orders', columns: [
+  { name: 'orders', columns: [
     { name: 'id', type: 'int' },
     { name: 'user_id', type: 'int' },
     { name: 'total_price', type: 'decimal' },
   ] },
-  { name: 'Products', columns: [
+  { name: 'products', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
     { name: 'price', type: 'decimal' },
   ] },
-  { name: 'Categories', columns: [
+  { name: 'categories', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
   ] },
-  { name: 'Customers', columns: [
+  { name: 'customers', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
     { name: 'phone', type: 'varchar' },
   ] },
-  { name: 'Payments', columns: [
+  { name: 'payments', columns: [
     { name: 'id', type: 'int' },
     { name: 'order_id', type: 'int' },
     { name: 'amount', type: 'decimal' },
   ] },
-  { name: 'Reviews', columns: [
+  { name: 'reviews', columns: [
     { name: 'id', type: 'int' },
     { name: 'product_id', type: 'int' },
     { name: 'rating', type: 'int' },
   ] },
-  { name: 'Shipping', columns: [
+  { name: 'shipping', columns: [
     { name: 'id', type: 'int' },
     { name: 'order_id', type: 'int' },
     { name: 'address', type: 'varchar' },
   ] },
-  { name: 'Employees', columns: [
+  { name: 'employees', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
     { name: 'department', type: 'varchar' },
   ] },
-  { name: 'Suppliers', columns: [
+  { name: 'suppliers', columns: [
     { name: 'id', type: 'int' },
     { name: 'name', type: 'varchar' },
     { name: 'contact', type: 'varchar' },

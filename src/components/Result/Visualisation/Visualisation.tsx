@@ -37,10 +37,12 @@ const Visualisation: React.FC<VisualisationProps> = ({
   return (
     <div style={{
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      width: '100%',
+      overflowY: 'hidden'
     }}>
       <div style={{
-        display: 'flex',
+        display: 'flex'
       }}
       >
         <FormControl sx={{ m: 2, minWidth: 120 }} size="small">
@@ -59,7 +61,8 @@ const Visualisation: React.FC<VisualisationProps> = ({
       </div>
       <div
         style={{
-          display: 'flex'
+          display: 'flex',
+          overflowY: 'hidden'
         }}
       >
         <div
@@ -68,7 +71,8 @@ const Visualisation: React.FC<VisualisationProps> = ({
             width: '50%',
             borderRight: '1px solid #dfdfdf',
             borderTop: '1px solid #dfdfdf',
-            borderBottom: '1px solid #dfdfdf'
+            borderBottom: '1px solid #dfdfdf',
+            overflowY: 'hidden'
           }}
         >
           <DataPieChart data={data} columnName={column}/>
@@ -79,7 +83,8 @@ const Visualisation: React.FC<VisualisationProps> = ({
             width: '50%',
             borderRight: '1px solid #dfdfdf',
             borderTop: '1px solid #dfdfdf',
-            borderBottom: '1px solid #dfdfdf'
+            borderBottom: '1px solid #dfdfdf',
+            overflowY: 'hidden'
           }}
         >
           <DataBarChart data={data} categoryKey={column} valueKey='count'/>
