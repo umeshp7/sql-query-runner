@@ -13,6 +13,12 @@ interface QueryEditorProps {
   setLoading: (loading: boolean) => void;
 }
 
+/**
+ * Code editor component and actions on query
+ *
+ * @param
+ * @returns
+ */
 function QueryEditor({
   handleAction,
   query,
