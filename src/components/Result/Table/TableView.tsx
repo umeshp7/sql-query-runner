@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
   Table,
   TableHead,
@@ -17,7 +17,11 @@ import './TableView.css';
 
 type Data = Array<Record<string, unknown>>;
 
-
+/**
+ * Table view component to show the table
+ * @param
+ * @returns
+ */
 const TableView = ({ data }: { data: Data }) => {
   const [orderBy, setOrderBy] = useState(null);
   const [order, setOrder] = useState<'asc' | 'desc' | undefined>('asc');
@@ -71,7 +75,7 @@ const TableView = ({ data }: { data: Data }) => {
               }}
             />
           </div>
-          <DownloadCSVButton jsonData={data} />
+          <DownloadCSVButton data={data} />
         </div>
       </Panel>
       <Panel

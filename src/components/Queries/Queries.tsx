@@ -16,6 +16,11 @@ type QueriesProps = {
   history: string[];
 };
 
+/**
+ * Queries Section with 2 tabs Saved and History
+ *
+ * @returns JSX.Element
+ */
 function Queries({ selectQuery, queries, history }: QueriesProps): JSX.Element {
   const [activeTab, setActiveTab] = useState('save');
   const [searchTerm, setSearchTerm] = useState('');

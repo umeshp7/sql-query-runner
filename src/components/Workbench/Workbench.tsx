@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useState, useEffect } from 'react';
 
 // external components
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
@@ -29,17 +29,20 @@ function Workbench () {
   const [currentQuery, setCurrentQuery] = useState(defaultCode);
   const [data, setData] = useState<DataObject[] | null>(null);
 
-  const savedQueries = JSON.parse(
-    localStorage.getItem(savedQueriesKey) || '[]');
   const [queryList, setQueryList] = useState<string[]>([
-    ...Object.values(defaultQueries), ...savedQueries
+    ...Object.values(defaultQueries)
   ]);
+  const [historyList, setHistoryList] = useState<string[]>([]);
 
-  const historyQueries = JSON.parse(
-    localStorage.getItem(historyQueriesKey) || '[]');
-  const [historyList, setHistoryList] = useState<string[]>([
-    ...historyQueries
-  ]);
+  useEffect(() => {
+    const savedQueries = JSON.parse(
+      localStorage.getItem(savedQueriesKey) || '[]');
+    setQueryList(prev => [...prev, ...savedQueries]);
+
+    const historyQueries = JSON.parse(
+      localStorage.getItem(historyQueriesKey) || '[]');
+    setHistoryList(historyQueries);
+  }, []);
 
   const handleAction = useCallback(
     (action: 'run' | 'save') => {

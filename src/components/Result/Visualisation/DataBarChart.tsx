@@ -27,18 +27,18 @@ const processData = (
 };
 
 const DataBarChart:React.FC<BarChartProps> =
-    ({ data, categoryKey, valueKey }) => {
-      const chartData = processData(data, categoryKey, valueKey);
+  ({ data, categoryKey, valueKey }) => {
+    const chartData = processData(data, categoryKey, valueKey);
 
-      return (
-        <BarChart
-          dataset={chartData}
-          xAxis={[{ scaleType: 'band', dataKey: categoryKey }]}
-          series={[{ dataKey: valueKey, label: `${valueKey} Count` }]}
-          width={1000}
-          height={300}
-        />
-      );
-    };
+    return (
+      <BarChart
+        dataset={chartData}
+        xAxis={[{ scaleType: 'band', dataKey: categoryKey }]}
+        series={[{ dataKey: valueKey, label: `${valueKey} Count` }]}
+        width={1000}
+        height={300}
+      />
+    );
+  };
 
 export default DataBarChart;
