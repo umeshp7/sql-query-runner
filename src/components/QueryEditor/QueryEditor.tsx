@@ -40,7 +40,7 @@ function QueryEditor({
         handleAction('run');
         setIsRunning(false);
         setLoading(false);
-      }, 500);
+      }, 650);
 
       return () => clearTimeout(timer);
     }
