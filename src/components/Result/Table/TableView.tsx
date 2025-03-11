@@ -1,14 +1,12 @@
 import { useState, useMemo } from 'react';
-import {
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  TableSortLabel,
-  TablePagination,
-  Typography,
-} from '@mui/material';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import TablePagination from '@mui/material/TablePagination';
+import Typography from '@mui/material/Typography';
 import { PanelGroup, Panel } from 'react-resizable-panels';
 
 import DownloadCSVButton from '../../Download/Download';

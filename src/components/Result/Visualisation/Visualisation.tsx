@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
+
+// external
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
+// internal
 import DataPieChart from './DataPieChart';
 import DataBarChart from './DataBarChart';
-import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 
 import './Visualisation.css';
 

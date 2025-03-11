@@ -11,7 +11,7 @@ import Result from '../Result/Result';
 // utils
 import { defaultQueries, getQueryData } from '../../utils/getQueryData';
 import debounce from 'debounce';
-import { Snackbar } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
 
 const defaultCode = `// Enter your SQL query here and press Ctrl+Enter to 
 execute.`;

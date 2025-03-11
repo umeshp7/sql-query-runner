@@ -1,13 +1,15 @@
 // Code for Result component
 import React, { memo, useState } from 'react';
-import {
-  CircularProgress,
-  Typography,
-} from '@mui/material';
-import { Tabs, Tab } from '@mui/material';
+
+// external
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import './Result.css';
 
+// internal
 import Visualisation from './Visualisation/Visualisation';
 import TableView from './Table/TableView';
 

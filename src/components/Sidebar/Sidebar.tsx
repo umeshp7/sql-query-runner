@@ -1,6 +1,8 @@
 import React from 'react';
+
+// external
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 import './Sidebar.css';
 
