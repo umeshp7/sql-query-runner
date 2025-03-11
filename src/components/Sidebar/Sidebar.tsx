@@ -1,7 +1,9 @@
 import React from 'react';
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { Typography } from '@mui/material';
-import Select from '@mui/material/Select';
+
+import './Sidebar.css';
+
 interface Column {
   name: string;
   type: string;
@@ -13,79 +15,73 @@ interface Table {
 }
 
 const tables: Table[] = [
-  { name: 'Users', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
-    { name: 'email', type: 'VARCHAR' },
+  { name: 'users', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
+    { name: 'email', type: 'varchar' },
   ] },
-  { name: 'Orders', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'user_id', type: 'INT' },
-    { name: 'total_price', type: 'DECIMAL' },
+  { name: 'orders', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'user_id', type: 'int' },
+    { name: 'total_price', type: 'decimal' },
   ] },
-  { name: 'Products', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
-    { name: 'price', type: 'DECIMAL' },
+  { name: 'products', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
+    { name: 'price', type: 'decimal' },
   ] },
-  { name: 'Categories', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
+  { name: 'categories', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
   ] },
-  { name: 'Customers', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
-    { name: 'phone', type: 'VARCHAR' },
+  { name: 'customers', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
+    { name: 'phone', type: 'varchar' },
   ] },
-  { name: 'Payments', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'order_id', type: 'INT' },
-    { name: 'amount', type: 'DECIMAL' },
+  { name: 'payments', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'order_id', type: 'int' },
+    { name: 'amount', type: 'decimal' },
   ] },
-  { name: 'Reviews', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'product_id', type: 'INT' },
-    { name: 'rating', type: 'INT' },
+  { name: 'reviews', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'product_id', type: 'int' },
+    { name: 'rating', type: 'int' },
   ] },
-  { name: 'Shipping', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'order_id', type: 'INT' },
-    { name: 'address', type: 'VARCHAR' },
+  { name: 'shipping', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'order_id', type: 'int' },
+    { name: 'address', type: 'varchar' },
   ] },
-  { name: 'Employees', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
-    { name: 'department', type: 'VARCHAR' },
+  { name: 'employees', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
+    { name: 'department', type: 'varchar' },
   ] },
-  { name: 'Suppliers', columns: [
-    { name: 'id', type: 'INT' },
-    { name: 'name', type: 'VARCHAR' },
-    { name: 'contact', type: 'VARCHAR' },
+  { name: 'suppliers', columns: [
+    { name: 'id', type: 'int' },
+    { name: 'name', type: 'varchar' },
+    { name: 'contact', type: 'varchar' },
   ] },
 ];
 
 const Sidebar: React.FC = () => {
   return (
-    <div>
-      <div style={{ display: 'flex',
-        justifyContent: 'space-evenly',
-        height:  '80%', alignItems: 'center', paddingLeft: 8 }}>
+    <div className='sidebar'>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          paddingLeft: 8
+        }}>
         <Typography
           variant="h6"
           component="h2"
           color='primary'
         >
-          Database Tables
+          Tables
         </Typography>
-        <Select
-          variant="outlined"
-          defaultValue="beta"
-          size='small'
-        >
-          <option value="beta">Beta</option>
-          <option value="stage">Stage</option>
-          <option value="prod">Prod</option>
-        </Select>
       </div>
       <SimpleTreeView aria-label="database schema">
         {tables.map((table, index) => (

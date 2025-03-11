@@ -1,85 +1,20 @@
 // Code for Result component
 import React, { memo, useState } from 'react';
-import Table from '@mui/material/Table';
 import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TablePagination,
-  TableRow,
+  CircularProgress,
   Typography,
 } from '@mui/material';
 import { Tabs, Tab } from '@mui/material';
 
 import './Result.css';
-import { Panel, PanelGroup } from 'react-resizable-panels';
-import DataPieChart from './Visualisation/DataPieChart';
 
-function TableView({ data }: { data: Array<Record<string, any>> }) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(25);
+import Visualisation from './Visualisation/Visualisation';
+import TableView from './Table/TableView';
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...data]
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [page, rowsPerPage],
-  );
+type Data = Array<Record<string, unknown>>;
+interface ResultProps { data: Data | null, loading: boolean }
 
-  return (
-    <PanelGroup direction='vertical' className='result-table-container'>
-      <Panel defaultSize={12} minSize={10}>
-        <div style={{ display: 'flex'}}>
-          <Typography
-            style={{ alignContent: 'center', paddingLeft: '16px' }}
-            color='textPrimary'
-            variant='subtitle2'
-          >
-            Time taken: 0.1s
-          </Typography>
-          <TablePagination
-            component='div'
-            count={data.length}
-            rowsPerPageOptions={[25, 50, 100]}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={(e, pageNumber) => { setPage(pageNumber); }}
-            onRowsPerPageChange={(e) => {
-              setRowsPerPage(parseInt(e.target.value, 10));
-            }}
-          />
-        </div>
-      </Panel>
-      <Panel defaultSize={90} style={{
-        borderTop:'1px solid #f0f0f0',
-        overflow: 'auto'
-      }}>
-        <div>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                {Object.keys(data[0]).map((key) => (
-                  <TableCell key={key}>{key}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {visibleRows.map((row, index) => (
-                <TableRow key={index}>
-                  {Object.values(row).map((value, idx) => (
-                    <TableCell key={idx}>{value}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </Panel>
-    </PanelGroup>
-  );
-}
-
-const EmptyState = () => {
+function EmptyState() {
   return (
     <div className='result-empty-state'>
       <Typography
@@ -89,11 +24,11 @@ const EmptyState = () => {
       </Typography>
     </div>
   );
-};
+}
 
-const ViewResult = ({
+function ViewResult({
   data
-}: { data: Array<Record<string, unknown>> }) => {
+}: { data: Data }) {
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newIndex: number) => {
@@ -101,12 +36,7 @@ const ViewResult = ({
   };
 
   return (
-    <div
-      style={{
-        height: '-webkit-fill-available',
-        borderTop: '1px solid #dfdfdf',
-        overflow: 'auto',
-      }}>
+    <div className='result-tabs'>
       <Tabs
         value={tabIndex}
         onChange={handleChange}
@@ -114,26 +44,27 @@ const ViewResult = ({
         <Tab label="Table" />
         <Tab label="Visualize" />
       </Tabs>
-      {tabIndex === 0 ? <TableView data={data} /> : <div>
-        <DataPieChart data={data} columnName='gender'/></div>}
-    </div>
-  );
-};
-
-function Result ({
-  data
-}: { data: Array<Record<string, unknown>> | null }) {
-  return (
-    <div
-      style={{
-        height: '-webkit-fill-available',
-        borderTop: '1px solid #dfdfdf',
-        overflow: 'auto',
-      }}
-    >
-      {data === null ? <EmptyState /> : <ViewResult data={data}/>}
+      {tabIndex === 0 ?
+        <TableView data={data} /> :
+        <Visualisation data={data} />}
     </div>
   );
 }
+
+const Result: React.FC<ResultProps> = ({ data, loading }) => {
+  return (
+    <div className='result-section'>
+      {loading ? (
+        <div className='result-loader'>
+          <CircularProgress />
+        </div>
+      ) : data === null ? (
+        <EmptyState />
+      ) : (
+        <ViewResult data={data} />
+      )}
+    </div>
+  );
+};
 
 export default memo(Result);

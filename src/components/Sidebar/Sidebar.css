@@ -1,0 +1,14 @@
+.sidebar {
+    height: -webkit-fill-available;
+    padding: 4px;
+    border-right: 1px solid #dfdfdf;
+    border-top: 1px solid #dfdfdf;
+    overflow: auto;
+}
+
+.sidebar-title {
+    display: 'flex';
+    height: '80%';
+    align-items: 'center';
+    padding-left: 8;
+}

@@ -1,4 +1,4 @@
-.workbench {
+.query {
     display: flex;
     flex-direction: column;
     height: -webkit-fill-available;
@@ -12,7 +12,12 @@
     height: 100%;
 }
 
-.workbench-actions {
+.query-editor {
+    height: 100%;
+    overflow: auto;
+}
+
+.query-actions {
     display: flex;
     flex-direction: row-reverse;
     gap: 4px;

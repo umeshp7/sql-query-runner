@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 // external components
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
@@ -9,54 +9,86 @@ import Queries from '../Queries/Queries';
 import Result from '../Result/Result';
 
 // utils
-import getQueryData from '../../utils/getQueryData';
+import { defaultQueries, getQueryData } from '../../utils/getQueryData';
+import debounce from 'debounce';
+import { Snackbar } from '@mui/material';
 
 const defaultCode = `// Enter your SQL query here and press Ctrl+Enter to 
 execute.`;
 
-function Workbench () {
-  const [currentQuery, setCurrentQuery] = useState(defaultCode);
-  const [data, setData] = useState<any[] | null>(null);
+type DataObject = {
+  [key: string]: string | number | boolean | null;
+};
 
+function Workbench () {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [currentQuery, setCurrentQuery] = useState(defaultCode);
+  const [data, setData] = useState<DataObject[] | null>(null);
   const [queryList, setQueryList] = useState<string[]>([
-    'SELECT * FROM table;',
-    'SELECT * FROM table WHERE column = value;',
-    'SELECT column1, column2 FROM table WHERE column = value;',
+    ...Object.values(defaultQueries)
   ]);
 
   const [historyList, setHistoryList] = useState<string[]>([]);
-  const handleAction = (action: string) => {
-    switch (action) {
-    case 'run': {
-      const data = getQueryData(currentQuery);
-      if (data) {
-        setData(data);
-      }
-      setHistoryList([currentQuery, ...historyList]);
-    }
-      break;
-    case 'save': {
-      const newQueryList = [...queryList, currentQuery];
 
-      setQueryList(newQueryList);
-    }
-      break;
-    default:
-      break;
-    }
-  };
+  const handleAction = useCallback(
+    (action: 'run' | 'save') => {
+      const query = currentQuery.trim();
+
+      if (query === '') {
+        setSnackbarMessage('Choose a query to run from saved list.');
+        setOpen(true);
+        return;
+      }
+
+      switch (action) {
+      case 'run': {
+        const data = getQueryData(currentQuery);
+        if (data) {
+          setData(data);
+        }
+        else {
+          setSnackbarMessage('Choose a query to run from saved list.');
+          setData(null);
+          setOpen(true);
+        }
+        setHistoryList([currentQuery, ...historyList]);
+        break;
+      }
+      case 'save': {
+        const newQueryList = [...queryList, currentQuery];
+        setQueryList(newQueryList);
+        setSnackbarMessage('Query saved.');
+        setOpen(true);
+        break;
+      }
+      default:
+        break;
+      }
+    },
+    [
+      currentQuery,
+      historyList,
+      queryList,
+      setData,
+      setHistoryList,
+      setQueryList
+    ]
+  );
 
   return (
     <PanelGroup direction='vertical' style={{height: '100%'}}>
       <Panel defaultSize={40}>
         <PanelGroup
           direction='horizontal'
-          style={{height: '-webkit-fill-available'}}>
+          style={{ height: '-webkit-fill-available' }}>
           <Panel defaultSize={80} minSize={30}>
             <QueryEditor
               query={currentQuery}
               handleAction={handleAction}
-              setQuery={setCurrentQuery}
+              setQuery={debounce(setCurrentQuery, 500)}
+              setLoading={setLoading}
             />
           </Panel>
           <Panel defaultSize={40}>
@@ -70,8 +102,14 @@ function Workbench () {
       </Panel>
       <PanelResizeHandle />
       <Panel minSize={40}>
-        <Result data={data}/>
+        <Result data={data} loading={loading}/>
       </Panel>
+      <Snackbar
+        open={open}
+        autoHideDuration={2500}
+        message={snackbarMessage}
+        onClose={() => setOpen(false)}
+      />
     </PanelGroup>
   );
 }
