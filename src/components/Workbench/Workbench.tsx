@@ -15,6 +15,8 @@ import { Snackbar } from '@mui/material';
 
 const defaultCode = `// Enter your SQL query here and press Ctrl+Enter to 
 execute.`;
+const historyQueriesKey = 'sql-history-queries';
+const savedQueriesKey = 'sql-saved-queries';
 
 type DataObject = {
   [key: string]: string | number | boolean | null;
@@ -26,11 +28,18 @@ function Workbench () {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [currentQuery, setCurrentQuery] = useState(defaultCode);
   const [data, setData] = useState<DataObject[] | null>(null);
+
+  const savedQueries = JSON.parse(
+    localStorage.getItem(savedQueriesKey) || '[]');
   const [queryList, setQueryList] = useState<string[]>([
-    ...Object.values(defaultQueries)
+    ...Object.values(defaultQueries), ...savedQueries
   ]);
 
-  const [historyList, setHistoryList] = useState<string[]>([]);
+  const historyQueries = JSON.parse(
+    localStorage.getItem(historyQueriesKey) || '[]');
+  const [historyList, setHistoryList] = useState<string[]>([
+    ...historyQueries
+  ]);
 
   const handleAction = useCallback(
     (action: 'run' | 'save') => {
@@ -54,6 +63,8 @@ function Workbench () {
           setOpen(true);
         }
         setHistoryList([currentQuery, ...historyList]);
+        localStorage.setItem(historyQueriesKey,
+          JSON.stringify([currentQuery, ...historyList]));
         break;
       }
       case 'save': {
@@ -61,6 +72,8 @@ function Workbench () {
         setQueryList(newQueryList);
         setSnackbarMessage('Query saved.');
         setOpen(true);
+        localStorage.setItem(savedQueriesKey,
+          JSON.stringify([...queryList, currentQuery].slice(3)));
         break;
       }
       default:

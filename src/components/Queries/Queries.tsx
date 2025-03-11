@@ -16,7 +16,6 @@ type QueriesProps = {
   history: string[];
 };
 
-
 function Queries ({
   selectQuery,
   queries,
