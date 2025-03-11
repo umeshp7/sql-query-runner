@@ -1,5 +1,4 @@
 import { JSX } from 'react';
-import './App.css';
 
 // external
 import { PanelGroup, Panel } from 'react-resizable-panels';
