@@ -20,7 +20,7 @@ const DataPieChart: React.FC<DataPieChartProps> = ({
   };
 
   const processedData = countOccurrences(data, columnName);
-  const chartData = Object.keys(processedData).map((key, index) => ({
+  const pieChartData = Object.keys(processedData).map((key, index) => ({
     id: index,
     value: processedData[key],
     label: key,
@@ -28,9 +28,9 @@ const DataPieChart: React.FC<DataPieChartProps> = ({
 
   return (
     <PieChart
-      series={[{ data: chartData }]}
-      width={1000}
-      height={200}
+      series={[{ data: pieChartData }]}
+      width={700}
+      height={300}
     />
   );
 };

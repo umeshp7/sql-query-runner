@@ -36,6 +36,7 @@ function App() : JSX.Element {
               padding: '4px',
               borderRight: '1px solid #dfdfdf',
               borderTop: '1px solid #dfdfdf',
+              overflow: 'auto'
             }}>
               <Sidebar />
             </div>

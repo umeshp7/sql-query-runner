@@ -13,7 +13,8 @@ import { Tabs, Tab } from '@mui/material';
 
 import './Result.css';
 import { Panel, PanelGroup } from 'react-resizable-panels';
-import DataPieChart from './Visualisation/DataPieChart';
+
+import Visualisation from './Visualisation/Visualisation';
 
 function TableView({ data }: { data: Array<Record<string, any>> }) {
   const [page, setPage] = React.useState(0);
@@ -23,7 +24,7 @@ function TableView({ data }: { data: Array<Record<string, any>> }) {
     () =>
       [...data]
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [page, rowsPerPage],
+    [page, rowsPerPage, data],
   );
 
   return (
@@ -79,7 +80,7 @@ function TableView({ data }: { data: Array<Record<string, any>> }) {
   );
 }
 
-const EmptyState = () => {
+function EmptyState() {
   return (
     <div className='result-empty-state'>
       <Typography
@@ -89,11 +90,11 @@ const EmptyState = () => {
       </Typography>
     </div>
   );
-};
+}
 
-const ViewResult = ({
+function ViewResult({
   data
-}: { data: Array<Record<string, unknown>> }) => {
+}: { data: Array<Record<string, unknown>> }) {
   const [tabIndex, setTabIndex] = useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newIndex: number) => {
@@ -114,11 +115,12 @@ const ViewResult = ({
         <Tab label="Table" />
         <Tab label="Visualize" />
       </Tabs>
-      {tabIndex === 0 ? <TableView data={data} /> : <div>
-        <DataPieChart data={data} columnName='gender'/></div>}
+      {tabIndex === 0 ?
+        <TableView data={data} /> :
+        <Visualisation data={data} />}
     </div>
   );
-};
+}
 
 function Result ({
   data
@@ -131,7 +133,9 @@ function Result ({
         overflow: 'auto',
       }}
     >
-      {data === null ? <EmptyState /> : <ViewResult data={data}/>}
+      {data === null ?
+        <EmptyState /> :
+        <ViewResult data={data}/>}
     </div>
   );
 }

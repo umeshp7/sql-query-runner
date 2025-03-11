@@ -7,7 +7,7 @@ import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { sql } from '@codemirror/lang-sql';
 
 type WorkbenchProps = {
-  handleAction: (action: string) => void;
+  handleAction: (action: 'run' | 'save') => void;
   query: string;
   setQuery: (query: string) => void;
 };
@@ -30,7 +30,6 @@ function Workbench({
           className='codemirror-editor'
           value={query}
           onChange={(value) => {
-            console.log('value', value);
             setQuery(value);
             return;
           }}
