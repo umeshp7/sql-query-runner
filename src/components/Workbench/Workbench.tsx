@@ -48,8 +48,14 @@ function Workbench () {
     (action: 'run' | 'save') => {
       const query = currentQuery.trim();
 
-      if (query === '') {
+      if (query === '' && action === 'run') {
         setSnackbarMessage('Choose a query to run from saved list.');
+        setOpen(true);
+        return;
+      }
+
+      if (query === '' && action === 'save') {
+        setSnackbarMessage('Please enter a query to save');
         setOpen(true);
         return;
       }
