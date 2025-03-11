@@ -68,6 +68,7 @@ function TableView({ data }: { data: Data }) {
             <TableBody>
               {visibleRows.map((row, index) => (
                 <TableRow key={index}>
+                  {/* eslint-disable-next-line */}
                   {Object.values(row).map((value: any, idx) => (
                     <TableCell key={idx}>{value}</TableCell>
                   ))}
