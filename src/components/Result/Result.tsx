@@ -1,6 +1,7 @@
 // Code for Result component
 import React, { memo, useState } from 'react';
 import {
+  CircularProgress,
   Typography,
 } from '@mui/material';
 import { Tabs, Tab } from '@mui/material';
@@ -11,7 +12,7 @@ import Visualisation from './Visualisation/Visualisation';
 import TableView from './Table/TableView';
 
 type Data = Array<Record<string, unknown>>;
-interface ResultProps { data: Data | null }
+interface ResultProps { data: Data | null, loading: boolean }
 
 function EmptyState() {
   return (
@@ -50,12 +51,18 @@ function ViewResult({
   );
 }
 
-const Result: React.FC<ResultProps> = ({ data }) => {
+const Result: React.FC<ResultProps> = ({ data, loading }) => {
   return (
     <div className='result-section'>
-      {data === null ?
-        <EmptyState /> :
-        <ViewResult data={data}/>}
+      {loading ? (
+        <div className='result-loader'>
+          <CircularProgress />
+        </div>
+      ) : data === null ? (
+        <EmptyState />
+      ) : (
+        <ViewResult data={data} />
+      )}
     </div>
   );
 };

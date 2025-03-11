@@ -22,6 +22,7 @@ type DataObject = {
 
 function Workbench () {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [currentQuery, setCurrentQuery] = useState(defaultCode);
   const [data, setData] = useState<DataObject[] | null>(null);
@@ -36,7 +37,8 @@ function Workbench () {
       const query = currentQuery.trim();
 
       if (query === '') {
-        // show modal
+        setSnackbarMessage('Choose a query to run from saved list.');
+        setOpen(true);
         return;
       }
 
@@ -47,7 +49,8 @@ function Workbench () {
           setData(data);
         }
         else {
-          setSnackbarMessage('Choose a query to run.');
+          setSnackbarMessage('Choose a query to run from saved list.');
+          setData(null);
           setOpen(true);
         }
         setHistoryList([currentQuery, ...historyList]);
@@ -85,6 +88,7 @@ function Workbench () {
               query={currentQuery}
               handleAction={handleAction}
               setQuery={debounce(setCurrentQuery, 500)}
+              setLoading={setLoading}
             />
           </Panel>
           <Panel defaultSize={40}>
@@ -98,9 +102,8 @@ function Workbench () {
       </Panel>
       <PanelResizeHandle />
       <Panel minSize={40}>
-        <Result data={data} />
+        <Result data={data} loading={loading}/>
       </Panel>
-
       <Snackbar
         open={open}
         autoHideDuration={2500}
