@@ -1,0 +1,11 @@
+.result-empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.result-table-container {
+    display: flex;
+    flex-direction: column;
+}

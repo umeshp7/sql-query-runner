@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import { JSX } from 'react';
 import './App.css';
 
-function App() {
+// external
+import { PanelGroup, Panel } from 'react-resizable-panels';
+
+// internal components
+import Workbench from './components/Workbench/Workbench';
+import Typography from '@mui/material/Typography';
+import Sidebar from './components/Sidebar/Sidebar';
+
+/**
+ * Base App
+ */
+function App() : JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PanelGroup direction='vertical' style={{height: '100vh'}}>
+      <Panel defaultSize={8}
+        style={
+          {paddingLeft: '16px',
+            height: '100%',
+            display: 'flex', alignItems: 'center'
+          }}>
+        <Typography
+          color='info'
+          fontWeight='bold'
+          variant='h6'>
+            SQL Query Runner
+        </Typography>
+      </Panel>
+      <Panel defaultSize={92}>
+        <PanelGroup direction='horizontal'>
+          <Panel defaultSize={20} minSize={10}>
+            <div style={{
+              height: '-webkit-fill-available',
+              padding: '4px',
+              borderRight: '1px solid #dfdfdf',
+              borderTop: '1px solid #dfdfdf',
+            }}>
+              <Sidebar />
+            </div>
+          </Panel>
+          <Panel minSize={40}>
+            <Workbench />
+          </Panel>
+        </PanelGroup>
+      </Panel>
+    </PanelGroup>
   );
 }
 
