@@ -5,11 +5,11 @@ This project is part of an assigment submission for Atlan. The app allows you to
 The application allows you to view a certain set of Tables, enter a query in a code editor, save query and run the query. You can also visualise your data in a Visualize tab that allows users to switch between various columns to view the Charts and trends. 
 
 ## Screenshots
-<img width="1470" alt="Screenshot 2025-03-11 at 3 19 38 PM" src="https://github.com/user-attachments/assets/065ea176-3f08-47c6-8bbe-a7c727c73340" />
+<img width="1469" alt="Screenshot 2025-03-11 at 5 53 33 PM" src="https://github.com/user-attachments/assets/2813a457-a028-4c9e-828b-14ab986269ad" />
 
 ---
 
-<img width="1470" alt="Screenshot 2025-03-11 at 3 19 25 PM" src="https://github.com/user-attachments/assets/6a2db67b-a091-4dcc-b742-4ebedabfc9cb" />
+<img width="1466" alt="Screenshot 2025-03-11 at 5 54 14 PM" src="https://github.com/user-attachments/assets/9c177c92-ecb9-404d-bda8-cac4fb3bf70c" />
 
 ---
 
