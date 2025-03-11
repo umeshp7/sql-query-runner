@@ -79,7 +79,7 @@ function Workbench () {
       <Panel defaultSize={40}>
         <PanelGroup
           direction='horizontal'
-          style={{height: '-webkit-fill-available'}}>
+          style={{ height: '-webkit-fill-available' }}>
           <Panel defaultSize={80} minSize={30}>
             <QueryEditor
               query={currentQuery}

@@ -2,6 +2,8 @@ import React from 'react';
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import { Typography } from '@mui/material';
 
+import './Sidebar.css';
+
 interface Column {
   name: string;
   type: string;
@@ -66,11 +68,10 @@ const tables: Table[] = [
 
 const Sidebar: React.FC = () => {
   return (
-    <div>
+    <div className='sidebar'>
       <div
         style={{
           display: 'flex',
-          height: '80%',
           alignItems: 'center',
           paddingLeft: 8
         }}>

@@ -16,11 +16,11 @@ function App() : JSX.Element {
   return (
     <PanelGroup direction='vertical' style={{height: '100vh'}}>
       <Panel defaultSize={8}
-        style={
-          {paddingLeft: '16px',
-            height: '100%',
-            display: 'flex', alignItems: 'center'
-          }}>
+        style={{
+          paddingLeft: '16px',
+          height: '100%',
+          display: 'flex', alignItems: 'center'
+        }}>
         <Typography
           color='info'
           fontWeight='bold'
@@ -31,15 +31,7 @@ function App() : JSX.Element {
       <Panel defaultSize={92}>
         <PanelGroup direction='horizontal'>
           <Panel defaultSize={20} minSize={10}>
-            <div style={{
-              height: '-webkit-fill-available',
-              padding: '4px',
-              borderRight: '1px solid #dfdfdf',
-              borderTop: '1px solid #dfdfdf',
-              overflow: 'auto'
-            }}>
-              <Sidebar />
-            </div>
+            <Sidebar />
           </Panel>
           <Panel minSize={40}>
             <Workbench />

@@ -12,6 +12,11 @@
     height: 100%;
 }
 
+.workbench-editor {
+    height: 100%;
+    overflow: auto;
+}
+
 .workbench-actions {
     display: flex;
     flex-direction: row-reverse;

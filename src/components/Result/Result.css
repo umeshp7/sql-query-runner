@@ -5,7 +5,14 @@
     height: 100%;
 }
 
-.result-table-container {
-    display: flex;
-    flex-direction: column;
+.result-section {
+    height: -webkit-fill-available;
+    border-top: 1px solid #dfdfdf;
+    overflow: auto;
+}
+
+.result-tabs {
+    height: -webkit-fill-available;
+    border-top: 1px solid #dfdfdf;
+    overflow: auto;
 }

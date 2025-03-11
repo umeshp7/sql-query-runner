@@ -19,12 +19,7 @@ function Workbench({
 }: WorkbenchProps) {
   return (
     <div className='workbench'>
-      <div className='workbench-editor'
-        style={{
-          height: '100%',
-          overflow: 'auto',
-        }}
-      >
+      <div className='workbench-editor'>
         <CodeMirror
           height='100%'
           className='codemirror-editor'

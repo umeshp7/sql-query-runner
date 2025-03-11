@@ -3,11 +3,20 @@ import DataPieChart from './DataPieChart';
 import DataBarChart from './DataBarChart';
 import { InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 
+import './Visualisation.css';
+
 const supportedKeys: Record<string, string[]> = {
   'student_id': ['subjects', 'location'],
   'customer_id' :['plan', 'membership_status'],
   'user_id': ['gender']
 };
+
+const VisualisationBox:
+  React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return <div className='visualisation-box'>
+      {children}
+    </div>;
+  };
 
 function getSupportedKeysArray<T extends Record<string, any>>(
   obj: T,
@@ -35,16 +44,8 @@ const Visualisation: React.FC<VisualisationProps> = ({
   }, [columns]);
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      overflowY: 'hidden'
-    }}>
-      <div style={{
-        display: 'flex'
-      }}
-      >
+    <div className='visualisation'>
+      <div className='visualisation-dropdown'>
         <FormControl sx={{ m: 2, minWidth: 120 }} size="small">
           <InputLabel>Column</InputLabel>
           <Select
@@ -59,36 +60,13 @@ const Visualisation: React.FC<VisualisationProps> = ({
           </Select>
         </FormControl>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          overflowY: 'hidden'
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            width: '50%',
-            borderRight: '1px solid #dfdfdf',
-            borderTop: '1px solid #dfdfdf',
-            borderBottom: '1px solid #dfdfdf',
-            overflowY: 'hidden'
-          }}
-        >
+      <div className='visualisation-charts'>
+        <VisualisationBox>
           <DataPieChart data={data} columnName={column}/>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            width: '50%',
-            borderRight: '1px solid #dfdfdf',
-            borderTop: '1px solid #dfdfdf',
-            borderBottom: '1px solid #dfdfdf',
-            overflowY: 'hidden'
-          }}
-        >
+        </VisualisationBox>
+        <VisualisationBox>
           <DataBarChart data={data} categoryKey={column} valueKey='count'/>
-        </div>
+        </VisualisationBox>
       </div>
     </div>
   );
