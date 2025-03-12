@@ -9,28 +9,25 @@ import ListItem from '@mui/material/ListItem';
 
 import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { sql } from '@codemirror/lang-sql';
+import { useWorkbench } from '../../context/WorkbenchContext';
 
-type QueriesProps = {
-  selectQuery?: (query: string) => void;
-  queries: string[];
-  history: string[];
-};
 
 /**
  * Queries Section with 2 tabs Saved and History
  *
  * @returns JSX.Element
  */
-function Queries({ selectQuery, queries, history }: QueriesProps): JSX.Element {
+function Queries(): JSX.Element {
   const [activeTab, setActiveTab] = useState('save');
   const [searchTerm, setSearchTerm] = useState('');
+  const { setCurrentQuery, historyList, queryList } = useWorkbench();
 
   const handleSelect = (query: string) => {
-    selectQuery && selectQuery(query || '');
+    setCurrentQuery && setCurrentQuery(query || '');
   };
 
   const filteredQueries =
-  (activeTab === 'save' ? queries : history).filter(query =>
+  (activeTab === 'save' ? queryList : historyList).filter(query =>
     query.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
