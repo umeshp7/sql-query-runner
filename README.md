@@ -30,4 +30,3 @@ To avoid increasing load times:
 2. Used best practices in imports to avoid loading unnecessary packages.
 3. Material-ui has tree-shaking and used best practices for that.
 4. Code mirror is the largest module - Checked alternatives before this monaco, react simple editor. This was the best fit in terms of size and usecase.
-5. [Future] Avoid using 
