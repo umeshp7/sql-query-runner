@@ -1,17 +1,12 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
 import './QueryEditor.css';
 
 import Button from '@mui/material/Button';
 import CodeMirror, { EditorView } from '@uiw/react-codemirror';
 import { sql } from '@codemirror/lang-sql';
-
-interface QueryEditorProps {
-  handleAction: (action: 'run' | 'save') => void;
-  query: string;
-  setQuery: (query: string) => void;
-  setLoading: (loading: boolean) => void;
-}
+import { useWorkbench } from '../../context/WorkbenchContext';
+import debounce from 'debounce';
 
 /**
  * Code editor component and actions on query
@@ -19,14 +14,15 @@ interface QueryEditorProps {
  * @param
  * @returns
  */
-function QueryEditor({
-  handleAction,
-  query,
-  setQuery,
-  setLoading,
-}: QueryEditorProps) {
+function QueryEditor() {
   const [isRunning, setIsRunning] = useState(false);
   const [stopped, setIsStopped] = useState(false);
+  const {
+    handleAction,
+    setCurrentQuery,
+    setLoading,
+    currentQuery
+  } = useWorkbench();
 
   const handleStop = () => {
     setIsStopped(true);
@@ -58,11 +54,8 @@ function QueryEditor({
         <CodeMirror
           height='100%'
           className='codemirror-editor'
-          value={query}
-          onChange={(value) => {
-            setQuery(value);
-            return;
-          }}
+          value={currentQuery}
+          onChange={debounce(setCurrentQuery, 500)}
           extensions={[sql(), EditorView.lineWrapping]}
           maxWidth='100%'
         />
